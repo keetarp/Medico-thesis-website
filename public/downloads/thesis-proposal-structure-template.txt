@@ -1,0 +1,12 @@
+Thesis Proposal Structure Template
+
+1. Thesis title
+2. Background and rationale
+3. Problem statement
+4. Aim and objectives
+5. Study design and setting
+6. Study population
+7. Inclusion and exclusion criteria
+8. Variables and definitions
+9. Data collection plan
+10. Statistical plan
