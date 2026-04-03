@@ -1,13 +1,39 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { schemaTypes } from "@/schemas";
+import { schemaTypes } from "./schemas";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your_project_id";
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+const PROJECT_ID_PATTERN = /^[a-z0-9-]+$/;
+
+function readRequiredEnv(name: string) {
+  const value = process.env[name]?.trim();
+
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+
+  return value;
+}
+
+const projectId = readRequiredEnv("SANITY_STUDIO_PROJECT_ID");
+const dataset = readRequiredEnv("SANITY_STUDIO_DATASET");
+
+if (!projectId) {
+  throw new Error("Missing Sanity project ID.");
+}
+
+if (!PROJECT_ID_PATTERN.test(projectId)) {
+  throw new Error(
+    `Invalid Sanity projectId "${projectId}". Expected only lowercase letters, digits, and dashes.`
+  );
+}
+
+if (!dataset) {
+  throw new Error("Missing Sanity dataset.");
+}
 
 export default defineConfig({
   name: "default",
-  title: "Pediatric Thesis Mentor Studio",
+  title: "Medico Thesis Advisor Studio",
   projectId,
   dataset,
   basePath: "/studio",
