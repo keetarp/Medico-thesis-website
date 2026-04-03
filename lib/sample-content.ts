@@ -2,6 +2,7 @@ import type {
   Author,
   BlogPost,
   Category,
+  ContactPageContent,
   FAQ,
   FounderProfile,
   HomePageContent,
@@ -29,6 +30,24 @@ export const siteSettings: SiteSettings = {
     { label: "YouTube", href: "https://youtube.com/" },
     { label: "WhatsApp", href: "https://wa.me/919999999999" },
   ],
+};
+
+export const contactPageContent: ContactPageContent = {
+  eyebrow: "Contact",
+  title: "Book a thesis advisory consultation.",
+  description:
+    "Share your current stage, draft, or core bottleneck and the next conversation will be shaped around what you need most.",
+  directContactLabel: "Direct contact",
+  directContactNote:
+    "Your details will remain confidential and will be used only for thesis advisory communication.",
+  whatsappButtonLabel: "WhatsApp Now",
+  beforeReachOutTitle: "Before you reach out",
+  beforeReachOutDescription:
+    "A short, clear summary of your stage usually makes the consultation more useful. If pediatrics is your specialty and you need full journey support, mention that clearly in your message.",
+  faqPreviewTitle: "FAQ preview",
+  seoTitle: `Contact | ${BRAND_NAME}`,
+  seoDescription:
+    "Book a thesis advisory consultation, contact Medico Thesis Advisor on WhatsApp, and share your stage for focused medico-academic guidance.",
 };
 
 export const homePageContent: HomePageContent = {

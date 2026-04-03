@@ -15,6 +15,20 @@ export type SiteSettings = {
   socialLinks: SocialLink[];
 };
 
+export type ContactPageContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  directContactLabel: string;
+  directContactNote?: string;
+  whatsappButtonLabel: string;
+  beforeReachOutTitle: string;
+  beforeReachOutDescription: string;
+  faqPreviewTitle: string;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
 export type FounderProfile = {
   name: string;
   credentials: string;

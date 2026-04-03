@@ -1,6 +1,7 @@
 import groq from "groq";
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]{brandName,tagline,description,contactEmail,whatsappLink,whatsappDisplay,location,consultationResponseTime,socialLinks}`;
+export const contactPageQuery = groq`*[_type == "contactPage"][0]{eyebrow,title,description,directContactLabel,directContactNote,whatsappButtonLabel,beforeReachOutTitle,beforeReachOutDescription,faqPreviewTitle,seoTitle,seoDescription}`;
 export const homePageQuery = groq`*[_type == "homePage"][0]{heroTitle,heroSubtitle,heroDescription,painPoints,valueTitle,valueDescription,processSteps,whyChooseUs,leadCtaTitle,leadCtaDescription,finalCtaTitle,finalCtaDescription}`;
 export const faqQuery = groq`*[_type == "faq"] | order(orderRank asc, _createdAt asc){question,answer}`;
 export const testimonialQuery = groq`*[_type == "testimonial"] | order(_createdAt desc){name,role,quote}`;

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import {
   blogPosts,
+  contactPageContent,
   faqs,
   homePageContent,
   resources,
@@ -11,6 +12,7 @@ import { sanityClient, sanityEnabled } from "@/lib/sanity/client";
 import {
   blogPostBySlugQuery,
   blogPostQuery,
+  contactPageQuery,
   faqQuery,
   homePageQuery,
   resourceBySlugQuery,
@@ -20,6 +22,7 @@ import {
 } from "@/lib/sanity/queries";
 import type {
   BlogPost,
+  ContactPageContent,
   FAQ,
   HomePageContent,
   Resource,
@@ -39,8 +42,23 @@ async function querySanity<T>(query: string, params?: Record<string, string>) {
   }
 }
 
+function fallbackIfEmpty<T>(value: T[] | null, fallback: T[]) {
+  if (!value || value.length === 0) {
+    return fallback;
+  }
+
+  return value;
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
   return (await querySanity<SiteSettings>(siteSettingsQuery)) || siteSettings;
+}
+
+export async function getContactPage(): Promise<ContactPageContent> {
+  return (
+    (await querySanity<ContactPageContent>(contactPageQuery)) ||
+    contactPageContent
+  );
 }
 
 export async function getHomePage(): Promise<HomePageContent> {
@@ -48,17 +66,18 @@ export async function getHomePage(): Promise<HomePageContent> {
 }
 
 export async function getFaqs(): Promise<FAQ[]> {
-  return (await querySanity<FAQ[]>(faqQuery)) || faqs;
+  return fallbackIfEmpty(await querySanity<FAQ[]>(faqQuery), faqs);
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return (
-    (await querySanity<Testimonial[]>(testimonialQuery)) || testimonials
+  return fallbackIfEmpty(
+    await querySanity<Testimonial[]>(testimonialQuery),
+    testimonials
   );
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  return (await querySanity<BlogPost[]>(blogPostQuery)) || blogPosts;
+  return fallbackIfEmpty(await querySanity<BlogPost[]>(blogPostQuery), blogPosts);
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
@@ -74,7 +93,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
 }
 
 export async function getResources(): Promise<Resource[]> {
-  return (await querySanity<Resource[]>(resourceQuery)) || resources;
+  return fallbackIfEmpty(await querySanity<Resource[]>(resourceQuery), resources);
 }
 
 export async function getResourceBySlug(slug: string): Promise<Resource> {
