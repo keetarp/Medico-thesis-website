@@ -25,7 +25,12 @@ export function ConsultationForm({ compact = false }: { compact?: boolean }) {
     });
 
     if (!response.ok) {
-      setError("Please review the required fields and try again.");
+      const data = (await response.json().catch(() => null)) as
+        | { error?: string }
+        | null;
+      setError(
+        data?.error || "Please review the required fields and try again."
+      );
       setSubmitting(false);
       return;
     }
